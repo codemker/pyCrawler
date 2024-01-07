@@ -13,7 +13,7 @@ driver = webdriver.Chrome()
 # Open the webpage
 driver.get(
     "https://www.patogupirkti.lt/catalogsearch/result?order=relevance&dir=desc&q='komunikacija'")
-time.sleep(3)
+time.sleep(1)
 
 # Collect all loaded data
 last_height = driver.execute_script("return document.body.scrollHeight")
@@ -22,7 +22,7 @@ while True:
     driver.execute_script("window.scrollTo(0, document.body.scrollHeight)")
 
     # wait for content to load
-    time.sleep(3)
+    time.sleep(1)
 
     # checking new height of webpage
     new_height = driver.execute_script("return document.body.scrollHeight")
@@ -38,9 +38,8 @@ results = []
 content = driver.page_source
 # Parse the HTML content
 soup = BeautifulSoup(content, 'html.parser')
-time.sleep(1)
 
-
+time.sleep(3)
 def gets_img(nbr):
     # find all elements with the specified class attribute.
     for clss in soup.findAll(attrs={"class": "photo"}):
@@ -62,5 +61,5 @@ def gets_img(nbr):
         # Save the image to the file path
         image.save(file_path)
 
-
 driver.quit()
+

@@ -1,11 +1,11 @@
 from lxml.etree import HTML
-from lxml import etree
 from requests import get
 import pandas as pd
 import csv
 import os
-import re
-import crawlerext.crawl_img 
+from crawlerext import crawl_img
+#import sys
+#sys.path.append("/crawlerext")
 
 os.makedirs('data', exist_ok=True)
 titles = []
@@ -34,10 +34,7 @@ def crawler_query(l: str, t: str, a: str, p: str)  -> list :
         # Extract the URLs of the books with ElementTree library, lxml extension and xpath() method
         for page_link in tree.xpath("//div[@class='title']//a/@href"):
             links.append(page_link)
-
             data = get(page_link)
-            treeim = HTML(data.text)
-
             treeim = HTML(data.text)
             # Extract the titles of the books with ElementTree library, lxml extension and xpath() method
             for book_title in treeim.xpath("//h1"):
@@ -82,33 +79,37 @@ def crawler_query(l: str, t: str, a: str, p: str)  -> list :
     except Exception:
         print("Error retrieving url")
 
-#if __name__ == "__main__":
-web_data = crawler_query("Link", "Title", "Author", "Price")
-df = pd.DataFrame(web_data)
-# Ask the user if they would like to save the data to a CSV file. If the "Y" entered, code will save the data to a CSV file and then exit the loop.
-while True:
-    saveCsv = input("Would yuo like to save data to cvs file Y/N ? ")   
-    if  saveCsv == "Y":
-        df.to_csv('data/report.csv', encoding='utf-8', index=False)
-        print("Books cvs file is saved")
-        break
-    elif saveCsv  == "N":
-        print("Books cvs file is not saved")
-        print(df)
-        break
-    else:
-        print("Type 'Y' for Yes and 'N' for No")
-        
-# Ask the user if they would like to save images. If the "Y" entered, code will save the images to the PC and then exit the loop.
-while True:
-    saveCsv = input("Would yuo like to save books images Y/N ? ")
-    crawl_img.gets_img(4)
-    if saveCsv == "Y":
-        getting_img()
-        print("Books images are saved")
-        break
-    elif saveCsv == "N":
-        print("Books images are not saved")
-        break
-    else:
-        print("You typed Y/N ?")
+if __name__ == "__main__":
+    web_data = crawler_query("Link", "Title", "Author", "Price")
+    df = pd.DataFrame(web_data)
+    # Ask the user if they would like to save the data to a CSV file. If the "Y" entered, code will save the data to a CSV file and then exit the loop.
+    while True:
+        saveCsv = input("Would yuo like to save data to cvs file Y/N ? ")   
+        if  saveCsv == "Y":
+            df.to_csv('data/report.csv', encoding='utf-8', index=False)
+            print("Books cvs file is saved")
+            print(df)
+            break
+        elif saveCsv  == "N":
+            print("Books cvs file is not saved")
+            print(df)
+            break
+        else:
+            print("Type 'Y' for Yes and 'N' for No")
+    """
+    images_save = getimg.get_img(4)
+    def getting_img():
+        return images_save
+    """   
+    # Ask the user if they would like to save images. If the "Y" entered, code will save the images to the PC and then exit the loop.
+    while True:
+        saveCsv = input("Would yuo like to save books images Y/N ? ")
+        if saveCsv == "Y":
+            crawl_img.gets_img(3)
+            print("Books images are saved")
+            break
+        elif saveCsv == "N":
+            print("Books images are not saved")
+            break
+        else:
+            print("You typed Y/N ?")
