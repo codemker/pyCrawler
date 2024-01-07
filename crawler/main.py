@@ -96,11 +96,7 @@ if __name__ == "__main__":
             break
         else:
             print("Type 'Y' for Yes and 'N' for No")
-    """
-    images_save = getimg.get_img(4)
-    def getting_img():
-        return images_save
-    """   
+    
     # Ask the user if they would like to save images. If the "Y" entered, code will save the images to the PC and then exit the loop.
     while True:
         saveCsv = input("Would yuo like to save books images Y/N ? ")
