@@ -17,7 +17,7 @@ extracted = []
 
 def crawler_query(l: str, t: str, a: str, p: str)  -> list :
     """
-    This function crawls the website search results for books and retrieves the URLs, titles, authors, and prices of the top 10 results.
+    This function crawls the website search results for books and retrieves the URLs, titles, authors, and prices.
 
     Returns:
         A list of dictionaries, where each dictionary has the following keys:
