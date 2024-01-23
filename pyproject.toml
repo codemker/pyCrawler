@@ -2,7 +2,7 @@
 name = "pycrawler"
 version = "0.1.0"
 description = ""
-authors = ["codemker <ciderifz@gmail.com>"]
+authors = ["codemker"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
